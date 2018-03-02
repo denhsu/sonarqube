@@ -249,6 +249,7 @@
       <id>dev</id>
       <properties>
         <yarn.script>build-fast</yarn.script>
+        <yarn.script>build-vsts</yarn.script>
       </properties>
     </profile>
   </profiles>

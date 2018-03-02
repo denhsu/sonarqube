@@ -2,6 +2,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+//const CopyWebpackPlugin = require('copy-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const webpack = require('webpack');
 const paths = require('./paths');
@@ -18,36 +19,17 @@ module.exports = ({ production = true, fast = false }) => ({
   entry: {
     vendor: [
       !production && require.resolve('react-dev-utils/webpackHotDevClient'),
-      require.resolve('./polyfills'),
       !production && require.resolve('react-error-overlay'),
-      'jquery',
-      'underscore',
-      'lodash',
-      'd3-array',
-      'd3-hierarchy',
-      'd3-scale',
-      'd3-selection',
-      'd3-shape',
       'react',
-      'react-dom',
-      'backbone',
-      'backbone.marionette',
-      'handlebars/runtime',
-      './src/main/js/libs/third-party/jquery-ui.js',
-      './src/main/js/libs/third-party/select2.js',
-      './src/main/js/libs/third-party/bootstrap/tooltip.js',
-      './src/main/js/libs/third-party/bootstrap/dropdown.js'
+      'react-dom'
     ].filter(Boolean),
 
-    app: [
-      './src/main/js/app/utils/setPublicPath.js',
-      './src/main/js/app/index.js',
-      './src/main/js/components/SourceViewer/SourceViewer.js'
-    ]
+    vsts: './src/main/js/app/integration/vsts/index.js'
   },
   output: {
-    path: paths.appBuild,
+    path: paths.vstsBuild,
     pathinfo: !production,
+    publicPath: '/integration/vsts/',
     filename: production ? 'js/[name].[chunkhash:8].js' : 'js/[name].js',
     chunkFilename: production ? 'js/[name].[chunkhash:8].chunk.js' : 'js/[name].chunk.js'
   },
@@ -71,17 +53,6 @@ module.exports = ({ production = true, fast = false }) => ({
           }
         ]
       },
-      {
-        test: /\.hbs$/,
-        use: [
-          {
-            loader: 'handlebars-loader',
-            options: {
-              helperDirs: path.join(__dirname, '../src/main/js/helpers/handlebars')
-            }
-          }
-        ]
-      },
       production
         ? {
             test: /\.css$/,
@@ -93,13 +64,7 @@ module.exports = ({ production = true, fast = false }) => ({
         : {
             test: /\.css$/,
             use: ['style-loader', utils.cssLoader({ production, fast }), utils.postcssLoader()]
-          },
-      { test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery' },
-      { test: require.resolve('underscore'), loader: 'expose-loader?_' },
-      { test: require.resolve('backbone'), loader: 'expose-loader?Backbone' },
-      { test: require.resolve('backbone.marionette'), loader: 'expose-loader?Marionette' },
-      { test: require.resolve('react'), loader: 'expose-loader?React' },
-      { test: require.resolve('react-dom'), loader: 'expose-loader?ReactDOM' }
+          }
     ].filter(Boolean)
   },
   plugins: [
@@ -114,13 +79,16 @@ module.exports = ({ production = true, fast = false }) => ({
 
     new HtmlWebpackPlugin({
       inject: false,
-      template: paths.appHtml,
+      template: paths.vstsHtml,
       minify: utils.minifyParams({ production, fast })
     }),
 
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(production ? 'production' : 'development')
-    }),
+    /*new CopyWebpackPlugin([
+      {
+        from: paths.appNodeModules + '/vss-web-extension-sdk/lib/VSS.SDK.min.js',
+        to: paths.jsBuild
+      }
+    ]),*/
 
     production &&
       !fast &&
@@ -132,12 +100,5 @@ module.exports = ({ production = true, fast = false }) => ({
       }),
 
     !production && new webpack.HotModuleReplacementPlugin()
-  ].filter(Boolean),
-  // Some libraries import Node modules but don't use them in the browser.
-  // Tell Webpack to provide empty mocks for them so importing them works.
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  }
+  ].filter(Boolean)
 });
