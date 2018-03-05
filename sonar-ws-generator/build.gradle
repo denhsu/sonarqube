@@ -2,8 +2,6 @@ sonarqube {
   skipProject = true
 }
 
-artifactoryPublish.skip = true
-
 dependencies {
   compile 'org.apache.velocity:velocity:1.7'
   compile 'org.slf4j:log4j-over-slf4j'

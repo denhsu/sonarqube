@@ -9,5 +9,3 @@ dependencies {
 
   testCompile 'junit:junit'
 }
-
-artifactoryPublish.skip = true

@@ -42,5 +42,3 @@ yarn_run {
 }
 
 war.dependsOn yarn_run
-
-artifactoryPublish.skip = true

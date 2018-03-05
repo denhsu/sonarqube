@@ -25,5 +25,3 @@ dependencies {
   testCompile 'com.tngtech.java:junit-dataprovider'
   testCompile 'com.google.code.findbugs:jsr305'
 }
-
-artifactoryPublish.skip = true

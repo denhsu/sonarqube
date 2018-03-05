@@ -16,5 +16,3 @@ dependencies {
   testCompile 'pmd:pmd:4.3'
   testCompile 'ch.qos.logback:logback-classic'
 }
-
-artifactoryPublish.skip = true

@@ -3,5 +3,3 @@ sonarqube {
     property 'sonar.projectName', "${sonarProjectName} :: Server :: Parent"
   }
 }
-
-artifactoryPublish.skip = true

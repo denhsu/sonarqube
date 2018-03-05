@@ -19,5 +19,3 @@ dependencies {
   testCompile 'com.google.code.findbugs:jsr305'
   testCompile 'com.h2database:h2'
 }
-
-artifactoryPublish.skip = true
