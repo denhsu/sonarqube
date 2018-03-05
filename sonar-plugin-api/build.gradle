@@ -66,6 +66,12 @@ shadowJar {
       exclude(dependency('org.codehaus.staxmate:staxmate'))
    }
 }
+
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
 artifactoryPublish.skip = false
 
 apply plugin: 'maven-publish'
@@ -73,6 +79,8 @@ publishing {
   publications {
     mavenJava(MavenPublication) {
       artifact source: shadowJar, classifier: null
+      artifact sourcesJar
+      artifact javadocJar
     }
   }
 }

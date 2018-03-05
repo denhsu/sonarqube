@@ -25,6 +25,11 @@ dependencies {
   testCompile 'commons-lang:commons-lang'
 }
 
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
 artifactoryPublish.skip = false
 
 apply plugin: 'maven-publish'
@@ -32,6 +37,8 @@ publishing {
   publications {
     mavenJava(MavenPublication) {
       from components.java
+      artifact sourcesJar
+      artifact javadocJar
     }
   }
 }

@@ -20,6 +20,11 @@ dependencies {
   testCompile 'com.google.guava:guava'
 }
 
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
 // Used by sonar-db-core to run DB Unit Tests
 artifactoryPublish.skip = false
 apply plugin: 'maven-publish'
@@ -27,6 +32,8 @@ publishing {
   publications {
     mavenJava(MavenPublication) {
       from components.java
+      artifact sourcesJar
+      artifact javadocJar
     }
   }
 }

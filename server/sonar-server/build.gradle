@@ -80,6 +80,8 @@ task testJar(type: Jar) {
 
 artifacts {
   archives testJar
+  archives sourcesJar
+  archives javadocJar
 }
 
 artifactoryPublish.skip = false
@@ -91,6 +93,8 @@ publishing {
     mavenJava(MavenPublication) {
       from components.java
       artifact testJar
+      artifact sourcesJar
+      artifact javadocJar
     }
   }
 }

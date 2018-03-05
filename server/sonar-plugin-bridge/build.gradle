@@ -10,6 +10,11 @@ dependencies {
   compileOnly 'com.google.code.findbugs:jsr305'
 }
 
+artifacts {
+  archives sourcesJar
+  archives javadocJar
+}
+
 artifactoryPublish.skip = false
 
 // Used by core plugins
@@ -18,6 +23,8 @@ publishing {
   publications {
     mavenJava(MavenPublication) {
       from components.java
+      artifact sourcesJar
+      artifact javadocJar
     }
   }
 }
