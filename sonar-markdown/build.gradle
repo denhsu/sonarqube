@@ -14,11 +14,6 @@ dependencies {
   testCompile 'org.assertj:assertj-core'
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 // Used by core plugins

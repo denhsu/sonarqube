@@ -25,11 +25,6 @@ test {
     systemProperty 'orchestrator.configUrl', System.getProperty('orchestrator.configUrl')
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 // Used by core plugins

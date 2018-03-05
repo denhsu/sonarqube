@@ -15,11 +15,6 @@ dependencies {
   testCompile 'org.assertj:assertj-core'
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 // Used by sonar-db-core to run DB Unit Tests
 artifactoryPublish.skip = false
 apply plugin: 'maven-publish'

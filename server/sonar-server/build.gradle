@@ -78,12 +78,6 @@ task testJar(type: Jar) {
   from sourceSets.test.output
 }
 
-artifacts {
-  archives testJar
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 // Used by core plugins

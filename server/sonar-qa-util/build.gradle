@@ -12,11 +12,6 @@ dependencies {
   compileOnly 'com.google.code.findbugs:jsr305'
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 // Required for core plugins

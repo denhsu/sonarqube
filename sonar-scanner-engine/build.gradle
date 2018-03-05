@@ -51,11 +51,6 @@ dependencies {
   testCompile project(':plugins:sonar-xoo-plugin')
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 // Used by core plugins

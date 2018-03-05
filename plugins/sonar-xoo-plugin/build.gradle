@@ -31,11 +31,6 @@ jar {
   }
 }
 
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
-
 artifactoryPublish.skip = false
 
 apply plugin: 'maven-publish'
